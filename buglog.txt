@@ -1,0 +1,163 @@
+MP3 BUG LOG
+
+Checkpoint 1:
+1. Unable to run debug.sh file was not found
+   1. Time to find: 1 hr. It took so long to find because the problem was not in our code but rather simply because of file formatting. Made us look through all our changes
+   2. Fix: Call dos2unix debug.sh to fix the formatting
+2. Init_paging defined more than once:
+   1. Time to find: 30 mins. This was again an issue of the system rather than implementation so it took a while to find. We thought it was something to do with header files and how we wrote the function but it is apparently because we named the assembly linked file for paging functionality paging.S which was the same name as paging.c.
+   2. Fix: changed the name of paging.c to initialize_paging.c
+3. Unable to compile keyboard.c:
+   1. Time to find: 20 mins. Map of scan code to ASCII code array has more characters than expected.
+   2. Fix: removed extra elements in the array.
+
+Checkpoint 2:
+Terminal:
+1. Keyboard not printing upper case characters
+   1. Time to find: 2 hr. Spent a lot of time on determining where the issue could be, and tried many different implementations
+   2. Fix: send EOI at the beginning of keyboard interrupt handler, and then get another scan code after special keys are pressed
+2. Line after exceeding screen size jumps two lines below
+   1. Time to find: 20 mins. Stepping through putc function to figure out where went wrong
+   2. Fix: added new line twice, remove one. 
+
+RTC:
+1. The rtc interrupt handler was not being called:
+   1.Time to find: 30 mins: I thought the handler was being called while testing the behavior suggested a problem in other areas of code
+   2. Fix: Enable ICW3_SLAVE on the PIC
+
+Filesystem:
+1. Wrong Memory location page fault:
+   Time to find: 30 mins; Tested many different ways to initialize boot block. 
+   Fix: 30 mins: after exhausting different ways to read the memory, it turns out that the contents of the filesystem is already in 
+                  a given memory location and so I had to change the approach of how i handle the filesystem functions
+2. Dentry input page fault:
+   Time to find: 1hr: Because I thought that it had something to do with how i paged the memory so I had to double check that it wasn't why
+   Fix: 10 mins: The bug was in how I passed the dentry_t struct to read_dentry_by_name. I passed a pointer that was never pointing to anything
+                  so the fix was making a initialization and passing dentry_t by reference.
+
+3. Printing random text when file_read 
+   Time to find: 15 mins; Had to read the read_data function to realize that when we can't read anymore bytes, it returns -1 instead of 0
+   Fix: Change file_read termination condition to when read_data returns -1 instead of 0.
+
+Checkpoint 3:
+1. Unable to read program image data even after read data to the pointer
+   a. Time to find: 1hr 30 hr. Spent a lot of time debugging this due to having to write
+      different test cases to find what is causing the page fault and why.
+   b. Fix: 15 mins. After looking at it from a high level, the bug was found to be in the
+      initialization of physical address corresponding to the page.
+
+2. Incompatible pointer type in jumptable.
+   a. Time to find: 20 minutes. The compiler pointed toward this error but was still
+      confused what part of it was incompatible due to the functions being passed
+      returning the same data type. Turns out the argument types also need to be the
+      same as the ones specified in the jumptable structure.
+   b. Fix: 20minutes. Had to make some changes to a lot of the read write driver
+      functions, especially terminal read and write. Also had to make empty read, write,
+      open, close, files for when the jumptable needs a function that does nothing.
+
+3. Page fault exception in execute
+   a. Time to find: 4hours. Although each part of the execute before iret was tested
+      before moving on to the next part, we had to retest it part by part to make sure
+      each part was not causing the page fault error. Once narrowed down to the iret
+      call and switch to user space, we got stuck on how to find out which part of the
+      iret stack or if it is the iret stack at all causing the error.
+   b. Fix: 20minutes. The error did not lie in the iret stack or any of the sub functions in
+      execute at all, it was simply because paging user supervisor flag was not turned
+      on. This bug was very elusive because we tested the paging function from the
+      kernel side the memory location specified did not cause any page faults which
+      makes sense, but it did cause page fault from the user side.
+
+4. Boot loop when executing shell
+   a. Time to find: 1 Hour. After calling IRET didn’t cause page fault anymore, the
+      terminal went on a boot loop. This took long to find the cause because there were
+      still doubts about IRET. Once IRET was cleared to be not source of the problem,
+   we stepped through the user code and found out that it was a problem in
+      terminal_read being faulty.
+   b. Fix: 30minutes. Had to rewrite terminal read and take a look at keyboard input
+      code from 3.2. Had to test it as its own function before finally testing the
+      execution of shell again.
+
+5. Shell Hang when running ls
+   a. Time to find: 15 minutes. Set some breakpoints in execute to find which part of
+      execute caused the hang or if it was a problem with IRET or halt. Fortunately
+      found that it was a small bug in execute where a while loops incrementer was
+      never incremented.
+   b. Fix:10 Minutes. Just had to increment the variable in the while loop which allowed
+      for creation of new process ids
+
+
+Checkpoint 4:
+1. syserr program failing on tests 5 and 6
+   a. Time to find: 10 minutes. The syserr tells you what functions failed so by inspecting
+      the code in ece391syserr.c I could tell that it was the vidmap and close system calls
+   b. Fix: 10 min, fixing close was easy since the invalid file descriptor check had its min 
+      FD set to 0 when it should be at 2 because stdin and stdout will always occupy the first
+      2 FDs. Fixing vidmap was harder  
+
+2. sigtest program didnt return after pagefault occurs
+   a. time to find: 20 min. using GDB it became clear that the kernel was stuck in an infinite
+      while loop in our page fault exception. This was leftover from earlier checkpoints.
+   b  time to fix: 10 min. changed exceptions so that instead of going into an infinite loop 
+      and halting the kernel, the halt system call is used to return to the parent program
+
+3. kernel broke when using exit command on parent shell
+   a. time to find: 30 min. after finding the bug, it took a while to go through all of the code
+      and realize that we just weren't checking to see if it was the parent shell being halted
+   b. time to fix: 20 min. once we knew what needed to be fixed we just needed to see how 
+      to properly track if it was the parent shell then figure out how to open another shell.
+      both of these were done in the halt system call. 
+      
+4. getargs function not working properly
+   a. time to find: 1 hour. This took a while as I was debugging another teammates code so it took a 
+      while to realize that we just weren't saving the arguments to the proper spot in the pcb during
+      the execute system call where the arguments are grabbed. Because they were never saved the getargs
+      function would always return nothing
+   b  time to fix: 10 min. Once found it was simply a matter of copying the arguments into the correct spot
+      in the pcb in the execute system call. Once in the PCB the getargs function was able to properly use 
+      arguments attained in the execute system call.
+
+
+
+Checkpoint 5:
+1. when implementing terminal switching, the cursor and location where text was being written wouldnt be saved
+   between swaps
+   a. time to find: 45 min, we had an improperly written function for transferring the x and y values between
+      lib.c where the putc function uses/updates x and y and terminal.c where the x and y values are saved and
+      the cursor is updated
+   b. time to fix: 30 min, by writing correct get and set functions for the x and y values and using them correctly
+      in the terminal_switch() function, the text began being written in the correct location
+
+2. upon each call of terminal_switch, whatever was in the keyboard of the previous terminal would be entered into 
+   the shell as the next instruction
+   a. time to find: 1 hour, to handle when the enter key was pressed we had a flag called enter_pressed_flag that would
+      indicate if/when enter was being pressed. This value was being improperly modified and stored between terminal swaps
+      leading to the enter_pressed_flag being raised every time the terminal switched, thus inputting the keyboard buffer
+   b. time to fix: 30 min, by removing and rewriting the logic for when the enter key is pressed the issue was resolved
+   
+3. when switching terminals, occasionally additional processes would be created when they shouldnt have been which
+   caused the kernel to freeze as if 6+ programs were running when in reality less than 6 programs were running
+   a. time to find: 1 hour. Harder to find because of how broad the implementation of scheduling is and how much could go wrong on the different aspects of the functionality.
+			Found it to be an implementation problem of the if statement that caused the respawning of shells if it was the last process. This caused shells 
+         to be spawned even though the base shell was never halted, causing a growing number of processes.
+   b. time to fix: 30 minutes. Had to find another way of implementing this checking function for the different terminals, but once done fixed the problem.
+
+4. when enabling scheduling, page faults would occur and the kernel would crash and boot loop
+   a.time to find: Very very long (6-7hrs). To find what was the root cause it took a really long time because it was not just caused by one error.
+   b. The different errors:
+	i. Scheduling the first three terminals properly so that it never points at esp and ebp that doesn't exist;
+		Fix: decided to approach it in a way where we start the next unstarted terminal from the schedule of the previous terminal so that there will be a process, "waiting" already
+	ii. Not factoring in halt and execute and overall syscalls could be scheduled too and possibly running in the background(non view terminal):
+		Fix: Made changes so that the process that is being syscalled is the current running terminal process or the process that just currently returned from scheduling
+	iii. Page Fault due to video memory paging errors and improper timing and updates to the video memory
+		Fix: Restructured updating video memory paging and taking a step back to see from a high level what the function is meant to do. The example in slides only shows a single scenario and
+			there were a lot of different scenarios where updating video memory paging was needed to not page fault.
+
+5. Errors in which terminal was printing characters and saving cursor.
+  a. time to find: 1 hour. Since it has to do with printing and cursor, it narrowed down the search of the bug to a small vicinity that is the terminal, keyboard, and updating video memory functions and segments.
+  b. time to fix: 3-4 hours: Fixing the bug took a while because of the untidy nature of the keyboard functions and having to restructure how putc was handled to allow for a proper multiple terminal impelementation that had the desired functionality.
+
+6. in a terminal, you could keep pressing delete and it would keep deleting characters nomatter what
+   a. time to find: 20 min, in our logic for delete we did a check to see if the buffer was empty, but 
+      for some reason putc was being called right before this check instead of inside this check.
+   b. time to fix: 5 min, by moving the putc to be inside the if statement that checked if the buffer was 
+      not empty the buffer only deletes when there are characters left in the keyboard buffers 

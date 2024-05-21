@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "fs.h": "c",
+        "syscall.h": "c",
+        "terminal.h": "c"
+    }
+}

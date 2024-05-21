@@ -1,0 +1,325 @@
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
+gcc -MM -nostdinc -g boot.S interrupt_linkage.S paging.S syscall_asm.S syscall_helper.S x86_desc.S exc_handler.c fs.c i8259.c initialize_paging.c init_idt.c kernel.c keyboard.c lib.c rtc.c syscall.c terminal.c tests.c   > Makefile.dep
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_linkage.o interrupt_linkage.S
+gcc  -nostdinc -g  -c -o paging.o paging.S
+gcc  -nostdinc -g  -c -o syscall_asm.o syscall_asm.S
+gcc  -nostdinc -g  -c -o syscall_helper.o syscall_helper.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o exc_handler.o exc_handler.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o fs.o fs.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o initialize_paging.o initialize_paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o init_idt.o init_idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o syscall.o syscall.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_linkage.o paging.o syscall_asm.o syscall_helper.o x86_desc.o exc_handler.o fs.o i8259.o initialize_paging.o init_idt.o kernel.o keyboard.o lib.o rtc.o syscall.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+sudo ./debug.sh
